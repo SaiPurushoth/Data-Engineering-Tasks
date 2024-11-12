@@ -69,9 +69,9 @@ def get_whether_data(web_url):
 def find_max_BulbTemperature():
     file_path=os.path.join(os.getcwd(), METADATA.DIRECTORY.value)
     csv_files = glob.glob(f"{file_path}/*.csv")
-    main_dataframe = pd.DataFrame(pd.read_csv(csv_files[0]))
+    main_dataframe = pd.DataFrame(pd.read_csv(csv_files[0],usecols = ['HourlyDewPointTemperature'])) # select only the column need to do operation to reduce in-memory size
     for i in range(1,len(csv_files)): 
-        data = pd.read_csv(csv_files[i]) 
+        data = pd.read_csv(csv_files[i],usecols = ['HourlyDewPointTemperature']) 
         df = pd.DataFrame(data) 
         main_dataframe = pd.concat([main_dataframe,df],axis=1) 
     print(main_dataframe)
@@ -90,7 +90,7 @@ def scrape_and_download():
 
 def main():
     try:
-        scrape_and_download()
+        # scrape_and_download()
         find_max_BulbTemperature()
     except Exception as e:
         log_error(f"System Error with exeception: {e}")
