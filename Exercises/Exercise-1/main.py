@@ -6,7 +6,8 @@ import asyncio
 import aiohttp
 from logger import log_debug,log_info,log_error
 
-class WEB(Enum):
+
+class METADATA(Enum):
     URLS = [
         "https://divvy-tripdata.s3.amazonaws.com/Divvy_Trips_2018_Q4.zip",
         "https://divvy-tripdata.s3.amazonaws.com/Divvy_Trips_2019_Q1.zip",
@@ -52,10 +53,10 @@ async def download_file(download_path, web_url, session):
 
 async def main():
     try:
-        download_path = create_dir(WEB.DIRECTORY.value)
+        download_path = create_dir(METADATA.DIRECTORY.value)
         async with aiohttp.ClientSession() as session:
             tasks = [
-                download_file(download_path, url, session) for url in WEB.URLS.value
+                download_file(download_path, url, session) for url in METADATA.URLS.value
             ]
             await asyncio.gather(
                 *tasks,
