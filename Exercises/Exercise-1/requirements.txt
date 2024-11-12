@@ -1,1 +1,4 @@
 requests==2.27.1
+pytest==7.1.2
+asyncio==3.4.3
+aiohttp==3.10.10
