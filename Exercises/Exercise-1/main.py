@@ -6,6 +6,7 @@ import asyncio
 import aiohttp
 from logger import log_debug,log_info,log_error
 
+
 class METADATA(Enum):
     URLS = [
         "https://divvy-tripdata.s3.amazonaws.com/Divvy_Trips_2018_Q4.zip",
